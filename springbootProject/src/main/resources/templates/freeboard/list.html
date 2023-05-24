@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{/layout/layout1}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<th:block layout:fragment="style1">
+	<style>
+		.oddStyle{background-color:lightgreen;}
+		.evenStyle{background-color:hotpink;}
+		.firstStyle{color:red;}
+		.lastStyle{color:pupple;}
+	</style>
+</th:block>
+
+
+</head>
+<body>
+<div class="panel panel-default" layout:fragment="content1">
+	<h1>FreeBoard List</h1>
+	<table border ='1' th:with="target1='user4' ,target2='user9' ">
+		<thead>
+		</thead>
+		<tbody>
+		
+			<tr>
+				<td >count,index</td>
+				<td >count,index</td>
+				<td >even,odd</td>
+				<td>size</td>
+				<td >번호</td>
+				<td >제목</td>
+				<td>작성자</td>
+				<td>target4찾기</td>
+				<td>target9찾기</td>
+				<td>삭제버튼</td>
+				<td>내용</td>
+				<td>작성일</td>
+				<td>수정일</td>
+			</tr>
+			<tr th:each="board,rowStatus :${boardList}"
+				th:class="${rowStatus.even}?'evenStyle':'oddStyle' " 
+				th:classappend = "${rowStatus.first or rowStatus.last}?'firstStyle' : ' ' "
+
+			>
+				<td th:text="${rowStatus.index + '--' + rowStatus.count}"></td>
+				<td th:text="|${rowStatus.index} --${rowStatus.count}|"></td>
+				<td th:text="|${rowStatus.first}--${rowStatus.last}"></td>
+				<td th:text="|${rowStatus.even}--${rowStatus.odd}"></td>
+				<td th:text="${rowStatus.size}"></td>
+				<td th:text="${board.bno}">번호</td>
+				<td th:text="${board.title}">제목</td>
+				<td th:text="${board.writer}">작성자</td>
+				<td th:text="${board.writer==target1?'찾음(user4)':'손님'}">작성자</td>
+				<td th:text="${board.writer==target2?'찾음(user9)':'손님'}">작성자</td>
+				<td th:if="${board.writer}">
+					<a href="#" th:if="${board.writer==target1}" >삭제</a>
+					<p th:unless="${board.writer==target2}"></p>
+				</td>
+				<td th:text="${board.content}">내용</td>
+				<td th:text="${board.regDate}">작성일</td>
+				<!-- html에서 inline으로 thymeleaf사용하기 -->
+				<td>[[${board.updateDate}]]</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+	<th:block layout:fragment="script1">
+		<script th:inline="javascript"> 
+				var boardList=[[${boardList}]];
+				$.each(boardList,function(index,item){
+					console.log(item);
+				});
+		</script>
+	</th:block>
+	
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{layout/layout1}">
+<head>
+<meta charset="UTF-8">
+<title>error500 페이지</title>
+
+</head>
+<body>
+	<div class="panel panel-default" layout:fragment="content1">
+		<h1>알림(문제발생)</h1>
+		<h2 style="color: red;">[[${msg}]]</h2>
+		<hr>
+<!-- 		<h2 style="color: red;">[[${errorMap.exception}]]</h2> -->
+		<h2 style="color: red;">[[${errorMap.timestamp}]]</h2>
+
+		<h2 style="color: red;">[[${errorMap.status}]]</h2>
+
+		<h2 style="color: red;">[[${errorMap.error}]]</h2>
+
+		<h2 style="color: red;">[[${errorMap.path}]]</h2>
+
+		<h2 style="color: red;">[[${errorMap.message}]]</h2>
+		
+	</div>
+</body>
+</html>

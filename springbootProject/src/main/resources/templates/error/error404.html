@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{layout/layout1}">
+<head>
+<meta charset="UTF-8">
+<title>ERROR 404</title>
+</head>
+<body>
+	<div class="panel panel-default" layout:fragment="content1">
+		<h1>[알림] 오류 발생!</h1>
+		<h2 th:text="${msg}"></h2>
+		
+		<p>요청하신 주소는 존재하지 않습니다.</p>
+		<img width="500px" height="500px" alt="img" th:src="@{/images/사자.jpg}">
+		<p id="here"></p>
+	</div>
+	
+	<th:block layout:fragment="script1">
+		<script>
+			document.getElementById('here').innerHTML = location.href;
+		</script>
+	</th:block>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Expression basic object</h1>
+	<p th:text="${boardList[0].title}"></p>
+	<p>inline방식 표현[[${boardList[0].title}]]</p>
+	<p>inline방식 표현[[${#vars.boardList[0].title}]]</p>
+	<p>[[${@environment.getProperty('app.title')}]]</p>
+	<p>[[${session.userName}]]</p>
+	<p>[[${param.userName}]]</p>
+	<p>[[${#request.getParameter("userName")}]]</p>
+	<p>[[${boardList.size()}]]</p>
+	
+	<hr>
+	
+	<p th:text = "${now}">1</p>
+	<p th:text = "${#dates.format(now,'yyyy-MM-dd')}">2</p>
+	<p th:with = "today = ${#dates.format(now,'yyyy-MM-dd')}">
+		3.[[${today}]]
+	</p>
+	<p th:text = "${price}">1</p>
+	<p th:text = "${#numbers.formatInteger(price,3,'COMMA')}">2</p>
+	<p th:text = "${#numbers.formatDecimal(price,5,5,'POINT')}">정수 5자리 소수아래 5자리</p>
+	<hr>
+	
+	<p th:text="${title}">1</p>
+	<p th:utext="${#strings.replace(title,'s','<b>s</b>')}">2</p>
+	<p th:utext="${#strings.replace(title,'s','<i>s</i>')}">3</p>
+	<p th:text="${#strings.toUpperCase(title)}">4</p>
+	<ul>
+		<li th:each="myword:${#strings.listSplit(title,'')}">
+		[[${myword}]]
+		</li>
+	</ul>
+	
+	<hr>
+	
+	<h2>링크 사용라기</h2>
+	<a th:href = "http://loscalhost:8888/app/freeboard/selectAll"></a>
+	<a th:href = "${/test1]">2</a>
+
+</body>
+</html>
